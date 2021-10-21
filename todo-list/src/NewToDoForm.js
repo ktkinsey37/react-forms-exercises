@@ -39,7 +39,7 @@ const NewToDoForm = ({ addToDo }) => {
       <input
         id="todo"
         name="todo"
-        value={formData.name}
+        value={formData.todo}
         onChange={handleChange}
         placeholder="Add New Todo"
       />

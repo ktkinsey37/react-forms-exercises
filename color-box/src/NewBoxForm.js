@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import BoxList from "./BoxList"
+
 import { v4 as uuid } from "uuid";
 
 /** Form for creating a new item to add to a list.
@@ -9,7 +11,7 @@ import { v4 as uuid } from "uuid";
  */
 
 const NewBoxForm = ({ addBox }) => {
-  const INITIAL_STATE = {todo:"New ToDo", id:0};
+  const INITIAL_STATE = {color: "red", height: 50, width: 50, id:uuid()};
   const [formData, setFormData] = useState(INITIAL_STATE);
 
   /** Send {name, quantity} to parent
@@ -17,7 +19,7 @@ const NewBoxForm = ({ addBox }) => {
 
   const handleSubmit = evt => {
     evt.preventDefault();
-    addToDo(formData);
+    addBox(formData);
     setFormData(INITIAL_STATE);
   };
 
@@ -35,18 +37,36 @@ const NewBoxForm = ({ addBox }) => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <label htmlFor="todo">ToDo:</label>
+      <label htmlFor="color">Color:</label>
       <input
-        id="todo"
-        name="todo"
-        value={formData.name}
+        id="color"
+        name="color"
+        value={formData.color}
         onChange={handleChange}
-        placeholder="Add New Todo"
+        placeholder="Color"
       />
 
-      <button>Add a new ToDo!</button>
+      <label htmlFor="width">Width:</label>
+      <input
+        id="width"
+        name="width"
+        value={formData.width}
+        onChange={handleChange}
+        placeholder="12"
+      />
+
+      <label htmlFor="height">Height:</label>
+      <input
+        id="height"
+        name="height"
+        value={formData.height}
+        onChange={handleChange}
+        placeholder="12"
+      />
+
+      <button>Add a new Box!</button>
     </form>
   );
 };
 
-export default NewToDoForm;
+export default NewBoxForm;

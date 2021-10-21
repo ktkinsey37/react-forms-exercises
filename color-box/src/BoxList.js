@@ -1,15 +1,11 @@
 import React, { useState } from "react";
-import ColorButtons from "./ColorButtons";
-import PositionedCircle from "./PositionedCircle";
+import Box from "./Box";
+import NewBoxForm from "./NewBoxForm"
 
-// import React, { useState } from "react";
-// import Box from "./Box";
-// import NewBoxForm from "./NewBoxForm"
-
-/** Get random int min..max (not incl max) */
-function randRange(min = 0, max = 100) {
-  return Math.random() * (max - min) + min;
-}
+// /** Get random int min..max (not incl max) */
+// function randRange(min = 0, max = 100) {boxes
+//   return Math.random() * (max - min) + min;
+// }
 
 /** Manage positioned & re-positionable circles.
  *
@@ -17,48 +13,36 @@ function randRange(min = 0, max = 100) {
  * - circles: array of circles: [ {x, y, color }, ... ]
  **/
 
-function PositionedColorfulCircles() {
-  const [circles, setCircles] = useState([]);
+function BoxList() {
+  const [boxes, setBoxes] = useState([]);
 
   /** Add a circle w/newColor */
-  function addCircle(newColor) {
-    setCircles(circles => [
-      ...circles,
-      { color: newColor, x: randRange(), y: randRange() },
+  function addBox({color, height, width, id}) {
+    setBoxes(boxes => [
+      ...boxes,
+      { color: color, height: height, width: width, id:id },
     ]);
   }
 
-  /** Change position of circle at index i */
-  function changePosition(i) {
-    setCircles(circles => {
-      // create copy of state array
-      const circlesCopy = [...circles];
-      // create copy of object at idx i,
-      // then change copy
-      circlesCopy[i] = {
-        ...circles[i],
-        x: randRange(),
-        y: randRange(),
-      };
-      // return circlesCopy;
-      return circlesCopy;
-    });
+  function remove(box){
+    setBoxes(boxes.filter(b => b.id !== box.id))
   }
-  // end
 
   return (
     <div>
-      <ColorButtons addCircle={addCircle} />
-      {circles.map((circle, i) => (
-        <PositionedCircle
-          circle={circle}
-          key={i}
-          idx={i}
-          changePosition={changePosition}
-        />
-      ))}
+      {boxes.map((box, i) => (
+        <div>
+            <Box
+            box={box}
+            key={box.id}
+            remove={() => remove(box)}
+             />
+        </div>
+        ))}
+      <NewBoxForm addBox={addBox}/>
     </div>
   );
 }
 
-export default PositionedColorfulCircles;
+
+export default BoxList;
