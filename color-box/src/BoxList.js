@@ -30,7 +30,7 @@ function BoxList() {
 
   return (
     <div>
-      {boxes.map((box, i) => (
+      {boxes.map((box) => (
         <div>
             <Box
             box={box}

@@ -4,7 +4,7 @@ import React from "react";
 
 function Box(props) {
 
-
+  // console.log(props, props.box.color, "THIS IS THE LINE THAT IS BOTH LOGGING AND THROWING?")
 
   return (
     <div>
@@ -12,7 +12,7 @@ function Box(props) {
         className="box"
         key={props.id}
         style={{
-          backgroundColor: props.box.color,
+          backgroundColor: `${props.box.color}`,
           position: "relative",
           height: `${props.box.height}px`,
           width: `${props.box.width}px`,
